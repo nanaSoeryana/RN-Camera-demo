@@ -6,7 +6,7 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 
 import CameraDemo from "../screens/camera";
-import BarcodeDemo from "../screens/camera";
+import BarcodeDemo from "../screens/barcode";
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -29,7 +29,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="Camera"
-        component={BarcodeDemo}
+        component={CameraDemo}
         options={{
           title: 'Camera',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,

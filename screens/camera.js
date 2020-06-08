@@ -1,11 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
+// import { withNavigationFocus } from 'react-navigation';
+import { useFocusEffect } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 
-export default function CameraDemo() {
+export default function CameraDemo(navigation) {
+  const isFocused = useIsFocused();
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  // const { isFocused } = this.props
+  // const [isFocused, setIsFocused] = React.useState(null);
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     const unsubscribe = API.subscribe(userId, user => setUser(data));
 
+  //     return () => unsubscribe();
+  //     // Return the function to unsubscribe from the event so it gets removed on unmount
+  //     // return unsubscribe;
+
+  //     // return () => unsubscribe();
+  //   }, [navigation])
+  // );
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
@@ -19,8 +35,10 @@ export default function CameraDemo() {
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
+  console.log("isFocused",isFocused);
   return (
     <View style={{ flex: 1 }}>
+    {isFocused ? 
       <Camera style={{ flex: 1 }} type={type}>
         <View
           style={{
@@ -45,6 +63,7 @@ export default function CameraDemo() {
           </TouchableOpacity>
         </View>
       </Camera>
+    :null}
     </View>
   );
 }
